@@ -2,10 +2,18 @@ require('sinatra')
 require('sinatra/contrib/all')
 require_relative('./models/game.rb')
 
+get '/' do
+  erb(:home)
+end
+
+get '/welcome' do
+  erb(:welcome)
+end
 
 get '/game/:hand1/:hand2' do
   result = Game.new(params[:hand1], params[:hand2])
-  return result.game_result()
+  @game = result.game_result()
+  erb(:result)
 end
 
 # get '/rock/paper' do
